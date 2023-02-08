@@ -16,14 +16,11 @@
     const root = document.getElementById("root");
 
     function App() {
-      // let [counter, modifier] = React.useState(0);
       const [counter, setCounter] = React.useState(0);
-      const arr = React.useState();
-      console.log(arr);
 
       const onClick = () => {
-        // counter = counter + 1;
-        setCounter(counter + 1);
+        // setCounter(counter + 1);
+        setCounter((current) => current + 1);
       };
       return (
         <div>
