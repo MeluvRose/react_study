@@ -17,8 +17,13 @@
 
     function App() {
       const [minutes, setMinutes] = React.useState();
+
       const onChange = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
+        setMinutes(event.target.value);
+      };
+      const reset = () => {
+        setMinutes(0);
       };
       return (
         <div>
@@ -31,9 +36,14 @@
             type="number"
             onChange={onChange}
           />
-          <h4>You want to convert {minutes} minutes</h4>
           <label htmlFor="hours">Hours</label>
-          <input id="hours" placeholder="0" type="number" />
+          <input
+            value={minutes / 60}
+            id="hours"
+            placeholder="0"
+            type="number"
+          />
+          <button onClick={reset}> 💣 </button>
         </div>
       );
     }
