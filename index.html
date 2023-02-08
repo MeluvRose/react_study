@@ -15,7 +15,7 @@
   <script type="text/babel">
     const root = document.getElementById("root");
 
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState(0);
       const [flipped, setFlipped] = React.useState(false);
 
@@ -29,7 +29,6 @@
       };
       return (
         <div>
-          <h1>Super Converter</h1>
           <label htmlFor="minutes">Minutes</label>
           <input
             value={flipped ? amount * 60 : amount}
@@ -50,6 +49,63 @@
           />
           <button onClick={reset}> 💣 </button>
           <button onClick={onFlip}> 🔃 </button>
+        </div>
+      );
+    }
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onFlip = () => {
+        setFlipped((current) => !current);
+        reset();
+      };
+      return (
+        <div>
+          <label htmlFor="km">Km</label>
+          <input
+            value={flipped ? (amount * 1.609).toFixed(3) : amount}
+            id="km"
+            placeholder="0"
+            type="number"
+            onChange={onChange}
+            disabled={flipped === true}
+          />
+          <label htmlFor="miles">Miles</label>
+          <input
+            value={flipped ? amount : (amount / 1.609).toFixed(3)}
+            id="miles"
+            placeholder="0"
+            type="number"
+            onChange={onChange}
+            disabled={flipped === false}
+          />
+          <button onClick={reset}> 💣 </button>
+          <button onClick={onFlip}> 🔃 </button>
+        </div>
+      );
+    }
+    function App() {
+      const [index, setIndex] = React.useState("x");
+
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="x">Select one of Units</option>
+            <option value="0">Min2Hour</option>
+            <option value="1">Km2Mile</option>
+          </select>
+          <hr />
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
